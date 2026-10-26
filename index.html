@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLINDNESS SECTOR</title>
+  <meta name="theme-color" content="#030404">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icone-192.png">
+  <script type="module" crossorigin src="./assets/index-CtQqYDG2.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DsCZpScK.css">
+</head>
+<body>
+  <!-- premier geste : il ouvre le son (les navigateurs l'exigent) et lance l'ouverture -->
+  <div id="liaison" hidden>
+    <div class="invite">
+      <p class="marque-mini">BLINDNESS SECTOR</p>
+      <button type="button"><span class="curseur">▶</span> ÉTABLIR LA LIAISON</button>
+      <small>[ENTRÉE] · casque recommandé · micro demandé pour la radio</small>
+    </div>
+  </div>
+
+  <div id="cine" hidden>
+    <div class="noir"></div>
+    <pre class="tele"></pre>
+    <pre class="crt" hidden></pre>
+    <canvas class="vitre" hidden></canvas>
+    <p class="info"></p>
+    <canvas class="onde" hidden></canvas>
+    <p class="passer">[Échap] passer</p>
+  </div>
+
+  <form id="lobby" autocomplete="off" hidden>
+    <header class="marque">
+      <div class="oeil" id="logo"></div>
+      <h1>BLINDNESS SECTOR</h1>
+      <p class="devise">L'Astronaute a les yeux. L'Opérateur a la carte.</p>
+    </header>
+
+    <nav class="menu">
+      <button type="button" data-p="nouvelle" class="actif">NOUVELLE MISSION</button>
+      <button type="button" data-p="reprendre">REPRENDRE</button>
+      <button type="button" data-p="rejoindre">REJOINDRE</button>
+      <button type="button" data-p="reglages">RÉGLAGES</button>
+      <button type="button" data-p="bo">BANDE ORIGINALE</button>
+      <button type="button" data-p="credits">CRÉDITS</button>
+    </nav>
+
+    <div class="console">
+      <fieldset class="roles">
+        <legend>Votre poste</legend>
+        <label><input type="radio" name="role" value="acteur" checked><span><b>ASTRONAUTE</b>Dans la station. Vous voyez, vous décrivez, vous agissez.</span></label>
+        <label><input type="radio" name="role" value="operateur"><span><b>OPÉRATEUR</b>Au sol. Vous avez les plans, les manuels, les commandes.</span></label>
+      </fieldset>
+
+      <section data-panneau="nouvelle">
+        <label class="coche" id="passer" hidden><input type="checkbox" name="passer"> Passer la certification (déjà obtenue)</label>
+        <p class="note">Vous hébergez la partie. Votre coéquipier rejoint avec le code de liaison qui s'affichera.</p>
+        <button type="submit" name="mode" value="creer">CRÉER LA SALLE</button>
+      </section>
+
+      <section data-panneau="reprendre" hidden>
+        <div id="sauvegardes" class="sauvegardes"></div>
+        <label class="champ">Ou coller un code de sauvegarde <input name="code" maxlength="40" placeholder="KESTREL-XXXXXX-XXXXXX-XXXXXX" autocapitalize="characters" spellcheck="false"></label>
+        <p class="note">Vous hébergez la partie au poste choisi (les rôles peuvent changer). Votre coéquipier rejoint avec le code de liaison.</p>
+        <button type="submit" name="mode" value="reprendre">REPRENDRE LA MISSION</button>
+      </section>
+
+      <section data-panneau="rejoindre" hidden>
+        <label class="champ">Code donné par votre coéquipier <input name="salle" maxlength="6" placeholder="ABCDEF" autocapitalize="characters" spellcheck="false"></label>
+        <p class="note">Vous prendrez le poste resté libre.</p>
+        <button type="submit" name="mode" value="rejoindre">REJOINDRE</button>
+      </section>
+
+      <section data-panneau="reglages" hidden>
+        <label class="ligne">VOLUME GÉNÉRAL <input type="range" id="titre-volume" min="0" max="1" step="0.05"></label>
+        <label class="coche"><input type="checkbox" name="daltonien"> Mode daltonien (motifs sur les câbles)</label>
+        <p class="note">Tous les réglages (sons, radio, luminosité, souris, résolution) : touche Échap en jeu.</p>
+      </section>
+
+      <section data-panneau="bo" hidden>
+        <div id="bo" class="bo"></div>
+        <p class="note">Les musiques du jeu, dans l'ordre de la mission. Cliquez une piste ; la suivante enchaîne.</p>
+      </section>
+
+      <section data-panneau="credits" hidden>
+        <p class="credits">Une production <b>FAW</b><br>French At Work</p>
+        <p class="note">Géométrie, textures et bruitages de secours sont générés en code. Voix enregistrées et sons de la station générés avec ElevenLabs.</p>
+        <button type="button" id="revoir">REVOIR L'OUVERTURE</button>
+      </section>
+
+      <p class="erreur" id="erreur" role="alert"></p>
+    </div>
+
+    <footer class="pied"><span id="version"></span><span>Liaison orbitale · 2 postes</span></footer>
+  </form>
+
+  <div id="attente" hidden>
+    <p>CODE DE SALLE</p>
+    <strong id="attente-code"></strong>
+    <button type="button" id="copier">COPIER LE CODE</button>
+    <p id="attente-texte"></p>
+    <p id="attente-etat"></p>
+  </div>
+  <div id="salle"></div>
+  <div id="note-sauvegarde" hidden></div>
+  <div id="aide"></div>
+</body>
+</html>
